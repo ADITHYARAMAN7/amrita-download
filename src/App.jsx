@@ -85,7 +85,7 @@ export default function App() {
 
     /* Trigger actual APK download */
     const a  = document.createElement('a')
-    a.href   = 'amrita-placement-tracker.apk'
+    a.href   = `${import.meta.env.BASE_URL}amrita-placement-tracker.apk`
     a.download = 'amrita-placement-tracker.apk'
     document.body.appendChild(a)
     a.click()
