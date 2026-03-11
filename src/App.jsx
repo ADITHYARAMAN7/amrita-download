@@ -36,14 +36,14 @@ function Step({ step, delay }) {
     <motion.div
       ref={ref}
       className="step-item"
-      initial={{ opacity: 0, x: -36 }}
+      initial={{ opacity: 0, x: -28 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.55, delay, ease: [0.25, 1, 0.5, 1] }}
+      transition={{ type: 'spring', stiffness: 180, damping: 22, delay }}
     >
       <motion.div
         className="step-num"
-        whileHover={{ scale: 1.3, rotate: 360, backgroundColor: '#c0392b', borderColor: '#c0392b' }}
-        transition={{ duration: 0.4 }}
+        whileHover={{ scale: 1.25, rotate: 360, backgroundColor: '#c0392b', borderColor: '#c0392b' }}
+        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
       >
         {step.id}
       </motion.div>
@@ -73,15 +73,15 @@ export default function App() {
     /* Simulated progress */
     let p = 0
     const iv = setInterval(() => {
-      p += Math.random() * 14 + 4
+      p += Math.random() * 8 + 3
       if (p >= 100) {
         clearInterval(iv)
         setProgress(100)
-        setTimeout(() => setPhase('done'), 450)
+        setTimeout(() => setPhase('done'), 400)
       } else {
         setProgress(Math.round(p))
       }
-    }, 180)
+    }, 120)
 
     /* Trigger actual APK download */
     const a  = document.createElement('a')
@@ -102,8 +102,8 @@ export default function App() {
             key={i}
             className="orb"
             style={{ width: orb.size, height: orb.size, left: orb.x, top: orb.y }}
-            animate={{ x: [0, 50, -30, 0], y: [0, -60, 30, 0], scale: [1, 1.1, 0.93, 1] }}
-            transition={{ duration: orb.dur, repeat: Infinity, ease: 'easeInOut', delay: orb.delay }}
+            animate={{ x: [0, 40, -25, 0], y: [0, -50, 25, 0], scale: [1, 1.08, 0.95, 1] }}
+            transition={{ duration: orb.dur, repeat: Infinity, ease: 'easeInOut', delay: orb.delay, repeatType: 'mirror' }}
           />
         ))}
         {PARTICLES.map(p => (
@@ -111,8 +111,8 @@ export default function App() {
             key={p.id}
             className="particle"
             style={{ left: p.left, top: p.top, width: p.size, height: p.size }}
-            animate={{ y: [0, -180, 0], opacity: [0, 0.85, 0] }}
-            transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeInOut' }}
+            animate={{ y: [0, -160, 0], opacity: [0, 0.75, 0] }}
+            transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeInOut', repeatType: 'mirror' }}
           />
         ))}
       </div>
@@ -124,7 +124,7 @@ export default function App() {
           className="hero-badge"
           initial={{ opacity: 0, scale: 0.6, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.5, type: 'spring', stiffness: 220 }}
+          transition={{ delay: 0.45, type: 'spring', stiffness: 260, damping: 22 }}
         >
           <span className="badge-dot" />
           Placement Tracker App
@@ -138,7 +138,7 @@ export default function App() {
               className="hero-char"
               initial={{ opacity: 0, y: 70, rotateX: -90 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ delay: 0.65 + i * 0.07, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.6 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
               {char}
             </motion.span>
@@ -150,7 +150,7 @@ export default function App() {
           className="hero-subtitle"
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 1.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
           PLACEMENT TRACKER
         </motion.div>
@@ -159,7 +159,7 @@ export default function App() {
           className="hero-desc"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
+          transition={{ delay: 1.35, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           Track placements, company drives &amp; offer letters —<br />
           right from your Android device.
@@ -181,8 +181,8 @@ export default function App() {
           className="download-card"
           initial={{ opacity: 0, y: 90, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          whileHover={{ boxShadow: '0 48px 120px rgba(139,26,26,0.35), 0 0 0 1px rgba(255,255,255,0.13)' }}
+          transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ scale: 1.012, boxShadow: '0 52px 130px rgba(139,26,26,0.38), 0 0 0 1px rgba(255,255,255,0.13)', transition: { duration: 0.45, ease: [0.25, 1, 0.5, 1] } }}
         >
           {/* Animated top glow border */}
           <div className="card-top-glow" />
@@ -190,13 +190,13 @@ export default function App() {
           {/* Floating app icon */}
           <motion.div
             className="app-icon-wrap"
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' }}
           >
             <motion.div
               className="app-icon"
-              whileHover={{ scale: 1.15, rotate: [0, -10, 10, -5, 0] }}
-              transition={{ duration: 0.45 }}
+              whileHover={{ scale: 1.12, rotate: [0, -8, 8, -4, 0] }}
+              transition={{ type: 'spring', stiffness: 300, damping: 18 }}
             >
               <svg viewBox="0 0 24 24" fill="white" width={46} height={46}>
                 <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
@@ -207,8 +207,8 @@ export default function App() {
               <motion.div
                 key={n}
                 className="icon-ring"
-                animate={{ scale: [1, 1.5 + n * 0.3], opacity: [0.55, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, delay: n * 0.45, ease: 'easeOut' }}
+            animate={{ scale: [1, 1.45 + n * 0.28], opacity: [0.5, 0] }}
+              transition={{ duration: 2.4, repeat: Infinity, delay: n * 0.5, ease: 'easeOut', repeatType: 'loop' }}
               />
             ))}
           </motion.div>
@@ -233,16 +233,17 @@ export default function App() {
           {/* ── Download button ── */}
           <motion.div className="btn-area"
             initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.05, type: 'spring', stiffness: 170 }}>
+            transition={{ delay: 0.95, type: 'spring', stiffness: 200, damping: 20 }}>
 
             <motion.button
               className={`btn-download ${phase}`}
               onClick={handleDownload}
               whileHover={phase === 'idle' ? {
-                scale: 1.05,
-                boxShadow: '0 0 50px rgba(192,57,43,0.75), 0 12px 40px rgba(139,26,26,0.55)',
+                scale: 1.04,
+                boxShadow: '0 0 55px rgba(192,57,43,0.8), 0 14px 44px rgba(139,26,26,0.6)',
+                transition: { duration: 0.35, ease: [0.25, 1, 0.5, 1] },
               } : {}}
-              whileTap={phase === 'idle' ? { scale: 0.96 } : {}}
+              whileTap={phase === 'idle' ? { scale: 0.97, transition: { duration: 0.15 } } : {}}
             >
               {/* Click ripples */}
               {ripples.map(r => (
@@ -251,8 +252,8 @@ export default function App() {
                   className="ripple"
                   style={{ left: r.x, top: r.y }}
                   initial={{ width: 0, height: 0, opacity: 0.55 }}
-                  animate={{ width: 520, height: 520, opacity: 0 }}
-                  transition={{ duration: 0.65, ease: 'easeOut' }}
+                  animate={{ width: 540, height: 540, opacity: 0 }}
+                  transition={{ duration: 0.7, ease: 'easeOut' }}
                 />
               ))}
 
@@ -299,12 +300,12 @@ export default function App() {
               {phase === 'downloading' && (
                 <motion.div className="progress-wrap"
                   initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>
+                  exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}>
                   <div className="progress-track">
                     <motion.div className="progress-fill"
                       initial={{ width: '0%' }}
                       animate={{ width: `${progress}%` }}
-                      transition={{ ease: 'easeOut', duration: 0.25 }} />
+                      transition={{ ease: [0.25, 1, 0.5, 1], duration: 0.3 }} />
                     <motion.div className="progress-shimmer"
                       animate={{ x: ['-100%', '300%'] }}
                       transition={{ duration: 1.3, repeat: Infinity, ease: 'easeInOut' }} />

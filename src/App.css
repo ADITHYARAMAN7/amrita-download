@@ -49,6 +49,8 @@
   );
   filter: blur(55px);
   transform: translate(-50%, -50%);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .particle {
@@ -56,6 +58,8 @@
   border-radius: 50%;
   background: rgba(192, 57, 43, 0.65);
   box-shadow: 0 0 8px rgba(192, 57, 43, 0.9), 0 0 20px rgba(192, 57, 43, 0.3);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* ── Header ── */
@@ -145,7 +149,7 @@
   width: 0;
   height: 1px;
   background: var(--m-bright);
-  transition: width 0.25s ease;
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-link:hover       { color: #fff; }
@@ -295,7 +299,8 @@
     0 28px 90px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(255, 255, 255, 0.04),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  transition: box-shadow 0.4s ease;
+  transition: box-shadow 0.55s cubic-bezier(0.25, 1, 0.5, 1), transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 /* Animated flowing top border */
@@ -344,6 +349,8 @@
     0 12px 44px rgba(139, 26, 26, 0.55),
     0 0 0 2px rgba(192, 57, 43, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 .icon-ring {
@@ -448,7 +455,10 @@
   box-shadow:
     0 4px 28px rgba(139, 26, 26, 0.50),
     inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  transition: background-position 0.4s ease, box-shadow 0.2s;
+  transition: background-position 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 .btn-download:not(.downloading):not(.done):hover {
@@ -535,7 +545,9 @@
   padding: 8px 20px;
   border-radius: 20px;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .btn-again:hover { border-color: rgba(255,255,255,0.26); color: #fff; }
 
@@ -630,7 +642,9 @@
   flex-shrink: 0;
   margin-top: 1px;
   cursor: default;
-  transition: background 0.25s;
+  transition: background 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .step-text {
